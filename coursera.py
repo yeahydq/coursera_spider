@@ -95,7 +95,26 @@ class Coursera(object) :
         XCSRF2Token = ''.join(self.random_string(24))
         XCSRFToken = ''.join(self.random_string(24))
         cookie = "csrftoken=%s; %s=%s" % (XCSRFToken, XCSRF2Cookie, XCSRF2Token)
-
+        """
+        Request Headers
+        :authority:www.coursera.org
+        :method:POST
+        :path:/api/login/v3
+        :scheme:https
+        accept:*/*
+        accept-encoding:gzip, deflate, br
+        accept-language:zh-CN
+        content-length:75
+        content-type:application/json; charset=UTF-8
+        cookie:CSRF3-Token=1475040588.Cf0cf2xslrUYJl34; __204u=1339213393-1474176588732; __utma=158142248.1996970244.1474176610.1474176610.1474176610.1; __utmc=158142248; __utmz=158142248.1474176610.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __204r=; ip_origin=HK; ip_currency=USD; _ga=GA1.2.1996970244.1474176610; __400vt=1474203970109; csrftoken=ms8TnT62GZlziSn8jKjeV3EW; csrf2_token_rs899aYR=78mvh4aEYOPUSnAS4vOnYp6w
+        origin:https://www.coursera.org
+        referer:https://www.coursera.org/learn/hipython
+        user-agent:Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2859.0 Safari/537.36
+        x-csrf2-cookie:csrf2_token_rs899aYR
+        x-csrf2-token:78mvh4aEYOPUSnAS4vOnYp6w
+        x-csrftoken:ms8TnT62GZlziSn8jKjeV3EW
+        x-requested-with:XMLHttpRequest
+        """
         request_header = {
             "Referer": "https://accounts.coursera.org/signin",  #对付防盗链设置, 为跳转来源的url
             "User-Agent": user_agent, #伪装成浏览器访问
@@ -170,14 +189,17 @@ class UserOrPwdNone(BaseException):
     """
 
 def main() :
-    if len(sys.argv) != 2 :
-        print "Please Input what course you want to download.."
-        sys.exit(2)
+    # if len(sys.argv) != 2 :
+    #     print "Please Input what course you want to download.."
+    #     sys.exit(2)
     url = "https://class.coursera.org/{course}/lecture"
-
-    user_name = raw_input("Input your Email > ")
-    password = getpass.getpass("Input your Password > ")
-    spider = Coursera(url.format(course = sys.argv[1]), user_name, password)
+    url="https://www.coursera.org/learn/hipython/home/welcome"
+    # user_name = raw_input("Input your Email > ")
+    # password = getpass.getpass("Input your Password > ")
+    user_name = 'yeahydq@163.com'
+    password = '87267526'
+    # spider = Coursera(url.format(course = sys.argv[1]), user_name, password)
+    spider = Coursera(url, user_name, password)
     spider.start_spider()
 
 if __name__ == '__main__':
